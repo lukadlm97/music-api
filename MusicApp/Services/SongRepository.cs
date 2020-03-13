@@ -1,16 +1,17 @@
 ﻿using MusicApp.Data.Model;
+using Ninject.Activation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace MusicApp.Services
 {
     public class SongRepository
     {
-        public Song[] GetSongs()
-        {
-            return new Song[] 
+        List<Song> Songs = new List<Song>
             {
                 new Song
                 {
@@ -74,7 +75,7 @@ namespace MusicApp.Services
                                 Surname="Megi"
                             }
                         }
-                    } 
+                    }
                 },
                 new Song
                 {
@@ -106,10 +107,21 @@ namespace MusicApp.Services
                                 Surname="Bajaga"
                             }
                         }
-                    } 
+                    }
                 }
             };
 
+        public List<Song> GetSongs()
+        {
+            return Songs;
+
+        }
+        public bool Save(Song song)
+        {
+            Songs.Add(song);
+
+
+            return true;
         }
     }
 }
