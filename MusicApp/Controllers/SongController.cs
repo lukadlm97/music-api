@@ -56,19 +56,10 @@ namespace MusicApp.Controllers
 
             return BadRequest("Can't delete with this index!");
         }
-        [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateSongItem(int id,[FromBody]Performer song)
+        [HttpPut]
+        public async Task<ActionResult> UpdateSongItem()
         {
-            if(id != song.Id)
-            {
-                return BadRequest();
-            }
-
-            var songItem = this.repository.GetSong(id);
-            if(songItem == null)
-            {
-                return NotFound();
-            }
+            string raw = Request.ReadFormAsync().ToString();
 
             return Ok();
         }
