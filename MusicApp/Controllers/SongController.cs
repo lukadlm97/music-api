@@ -40,5 +40,38 @@ namespace MusicApp.Controllers
 
             return Ok(song);
         }
+        [HttpPost]
+        public async Task<ActionResult<Song>> CreateSong(HttpRequest request)
+        {
+            
+            return BadRequest("Cannot create object like this.");
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteSongItem(int id)
+        {
+            if (this.repository.DeleteFromListById(id))
+            {
+                return Ok($"Deleted song with id={id}");
+            }
+
+            return BadRequest("Can't delete with this index!");
+        }
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateSongItem(int id,[FromBody]Performer song)
+        {
+            if(id != song.Id)
+            {
+                return BadRequest();
+            }
+
+            var songItem = this.repository.GetSong(id);
+            if(songItem == null)
+            {
+                return NotFound();
+            }
+
+            return Ok();
+        }
+
     }
 }

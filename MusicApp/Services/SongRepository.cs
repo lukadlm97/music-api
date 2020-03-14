@@ -111,6 +111,19 @@ namespace MusicApp.Services
                 }
             };
 
+        internal bool DeleteFromListById(int id)
+        {
+            Song song = GetSong(id);
+
+            if (song != null)
+            {
+                Songs.Remove(song);
+                return true;
+            }
+
+            return false;
+        }
+
         internal Song GetSong(int id)
         {
             foreach(Song song in Songs)
@@ -128,7 +141,15 @@ namespace MusicApp.Services
         }
         public bool Save(Song song)
         {
-            Songs.Add(song);
+            try
+            {
+                Songs.Add(song);
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
 
 
             return true;
