@@ -111,6 +111,16 @@ namespace MusicApp.Services
                 }
             };
 
+        internal Song GetSong(int id)
+        {
+            foreach(Song song in Songs)
+            {
+                if (song.Id == id)
+                    return song;
+            }
+            return null;
+        }
+
         public List<Song> GetSongs()
         {
             return Songs;
