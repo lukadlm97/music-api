@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -57,11 +58,11 @@ namespace MusicApp.Controllers
             return BadRequest("Can't delete with this index!");
         }
         [HttpPut]
-        public async Task<ActionResult> UpdateSongItem()
+        public HttpResponseMessage UpdateSongItem([FromBody] dynamic content)
         {
-            string raw = Request.ReadFormAsync().ToString();
-
-            return Ok();
+            
+            
+            return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
         }
 
     }
